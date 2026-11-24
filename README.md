@@ -29,6 +29,17 @@ every reviewer wants to see.
 - CLI: `canon`, `audit`, `version`. Exit codes 0/1/2 for
   Scored/EmptyRetrieval/Unverified.
 
+## Lexical ladder (synthetic)
+
+`retrievalaudit ladder` scores a seeded synthetic fixture (400 claims, seed 7;
+no real RAG system) at four rungs. Results are in
+`results/588-lexical-ladder.json`: the token-overlap-0.8 rung accepted
+1.0 of contradicting passages (`/ladder/rungs/overlap_0_8/contradicting_accept_rate`)
+and 0.0 of unrelated passages (`/ladder/rungs/overlap_0_8/unrelated_accept_rate`);
+the exact-substring rung accepted 0.0 of contradicting passages. The fixture's
+contradictions differ by one inserted negation or one swapped token by
+construction, so this shows the signal's construction, not real-world rates.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores

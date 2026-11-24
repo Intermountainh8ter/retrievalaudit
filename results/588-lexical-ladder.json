@@ -1,0 +1,105 @@
+{
+  "ladder": {
+    "boot": 2000,
+    "n_claims": 400,
+    "rungs": {
+      "exact_substring": {
+        "contradicting_accept_rate": 0.0,
+        "contradicting_ci": {
+          "ci95_hi": 0.0,
+          "ci95_lo": 0.0,
+          "rate": 0.0
+        },
+        "supporting_accept_rate": 1.0,
+        "supporting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "unrelated_accept_rate": 0.0,
+        "unrelated_ci": {
+          "ci95_hi": 0.0,
+          "ci95_lo": 0.0,
+          "rate": 0.0
+        }
+      },
+      "overlap_0_5": {
+        "contradicting_accept_rate": 1.0,
+        "contradicting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "supporting_accept_rate": 1.0,
+        "supporting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "unrelated_accept_rate": 0.0,
+        "unrelated_ci": {
+          "ci95_hi": 0.0,
+          "ci95_lo": 0.0,
+          "rate": 0.0
+        }
+      },
+      "overlap_0_8": {
+        "contradicting_accept_rate": 1.0,
+        "contradicting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "supporting_accept_rate": 1.0,
+        "supporting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "unrelated_accept_rate": 0.0,
+        "unrelated_ci": {
+          "ci95_hi": 0.0,
+          "ci95_lo": 0.0,
+          "rate": 0.0
+        }
+      },
+      "overlap_1_0": {
+        "contradicting_accept_rate": 0.5025,
+        "contradicting_ci": {
+          "ci95_hi": 0.5525,
+          "ci95_lo": 0.4525,
+          "rate": 0.5025
+        },
+        "supporting_accept_rate": 1.0,
+        "supporting_ci": {
+          "ci95_hi": 1.0,
+          "ci95_lo": 1.0,
+          "rate": 1.0
+        },
+        "unrelated_accept_rate": 0.0,
+        "unrelated_ci": {
+          "ci95_hi": 0.0,
+          "ci95_lo": 0.0,
+          "rate": 0.0
+        }
+      }
+    },
+    "seed": 7,
+    "synthetic": true
+  },
+  "provenance": {
+    "command": "retrievalaudit ladder --seed 7 --n-claims 400 --boot 2000 --out results/588-lexical-ladder.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-24T12:35:54Z",
+    "wall_s": 0.053892981
+  }
+}

@@ -13,6 +13,7 @@
 //! See `docs/PREREGISTRATION.md` for the clauses this scaffold closes.
 
 use rand::SeedableRng;
+pub mod ladder;
 use rand_pcg::Pcg64Mcg;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};

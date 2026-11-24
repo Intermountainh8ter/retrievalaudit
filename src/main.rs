@@ -45,6 +45,17 @@ enum Cmd {
         #[arg(long, default_value_t = 42)]
         seed: u64,
     },
+    /// Model-free lexical strictness ladder on a seeded synthetic fixture.
+    Ladder {
+        #[arg(long, default_value_t = 7)]
+        seed: u64,
+        #[arg(long, default_value_t = 400)]
+        n_claims: usize,
+        #[arg(long, default_value_t = 2000)]
+        boot: usize,
+        #[arg(long)]
+        out: PathBuf,
+    },
     /// Print the version banner and exit.
     Version,
 }
@@ -60,6 +71,20 @@ fn read_jsonl<T: serde::de::DeserializeOwned>(p: &PathBuf) -> anyhow::Result<Vec
         out.push(serde_json::from_str(t).map_err(|e| anyhow::anyhow!("line {}: {e}", i + 1))?);
     }
     Ok(out)
+}
+
+fn utc_iso(secs: u64) -> String {
+    let (days, rem) = (secs / 86400, secs % 86400);
+    let z = days as i64 + 719468;
+    let era = z.div_euclid(146097);
+    let doe = z.rem_euclid(146097);
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let d = doy - (153 * mp + 2) / 5 + 1;
+    let m = if mp < 10 { mp + 3 } else { mp - 9 };
+    let y = yoe + era * 400 + if m <= 2 { 1 } else { 0 };
+    format!("{y:04}-{m:02}-{d:02}T{:02}:{:02}:{:02}Z", rem / 3600, rem % 3600 / 60, rem % 60)
 }
 
 fn main() -> anyhow::Result<()> {
@@ -93,6 +118,28 @@ fn main() -> anyhow::Result<()> {
                 Verdict::EmptyRetrieval => std::process::exit(1),
                 Verdict::Unverified(_) => std::process::exit(2),
             }
+        }
+        Cmd::Ladder { seed, n_claims, boot, out } => {
+            let t0 = std::time::Instant::now();
+            let started = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)?
+                .as_secs();
+            let ladder = retrievalaudit::ladder::run_ladder(seed, n_claims, boot);
+            let doc = serde_json::json!({
+                "ladder": ladder,
+                "provenance": {
+                    "started_at": utc_iso(started),
+                    "seeds": [seed],
+                    "command": format!("retrievalaudit ladder --seed {seed} --n-claims {n_claims} --boot {boot} --out {}", out.display()),
+                    "hardware": "cpu",
+                    "wall_s": t0.elapsed().as_secs_f64(),
+                    "data_sources": [{"url": "synthetic: generated in-crate from seed, no external data", "license": "MIT"}],
+                },
+            });
+            if let Some(d) = out.parent() {
+                std::fs::create_dir_all(d)?;
+            }
+            std::fs::write(&out, serde_json::to_string_pretty(&doc)? + "\n")?;
         }
         Cmd::Version => println!("retrievalaudit {}", env!("CARGO_PKG_VERSION")),
     }
