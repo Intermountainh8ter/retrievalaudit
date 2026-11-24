@@ -14,6 +14,7 @@ pub struct Item {
     pub supporting: Vec<String>,
     pub contradicting: Vec<String>,
     pub unrelated: Vec<String>,
+    pub negation_type: bool,
 }
 
 fn word(prefix: &str, i: usize) -> String {
@@ -34,7 +35,8 @@ pub fn build_fixture(seed: u64, n: usize) -> Vec<Item> {
         supporting.extend(pad(&mut rng));
         let mut contra_claim = claim.clone();
         let pos = rng.gen_range(1..len);
-        if rng.gen::<bool>() {
+        let negation_type = rng.gen::<bool>();
+        if negation_type {
             contra_claim.insert(pos, "not".to_string());
         } else {
             contra_claim[pos] = word("v", rng.gen_range(0..5000));
@@ -44,7 +46,7 @@ pub fn build_fixture(seed: u64, n: usize) -> Vec<Item> {
         contradicting.extend(pad(&mut rng));
         let unrelated: Vec<String> =
             (0..len + 8).map(|_| word("u", rng.gen_range(0..5000))).collect();
-        items.push(Item { claim, supporting, contradicting, unrelated });
+        items.push(Item { claim, supporting, contradicting, unrelated, negation_type });
     }
     items
 }
@@ -58,16 +60,24 @@ fn overlap(passage: &[String], claim: &[String]) -> f64 {
     hit as f64 / claim.len() as f64
 }
 
+fn not_count(tokens: &[String]) -> usize {
+    tokens.iter().filter(|t| t.as_str() == "not").count()
+}
+
 #[derive(Clone, Copy)]
 enum Rung {
     Exact,
     Overlap(f64),
+    NegationGuard(f64),
 }
 
 fn accepts(r: Rung, passage: &[String], claim: &[String]) -> f64 {
     let ok = match r {
         Rung::Exact => contains_run(passage, claim),
         Rung::Overlap(t) => overlap(passage, claim) >= t - 1e-12,
+        Rung::NegationGuard(t) => {
+            overlap(passage, claim) >= t - 1e-12 && not_count(passage) == not_count(claim)
+        }
     };
     if ok { 1.0 } else { 0.0 }
 }
@@ -80,11 +90,12 @@ fn rate(vals: &[f64], boot: usize, seed: u64) -> Value {
 /// Returns the `ladder` object; contradicting_accept_rate etc. are flat leaves.
 pub fn run_ladder(seed: u64, n: usize, boot: usize) -> Value {
     let items = build_fixture(seed, n);
-    let rungs: [(&str, Rung); 4] = [
+    let rungs: [(&str, Rung); 5] = [
         ("exact_substring", Rung::Exact),
         ("overlap_0_5", Rung::Overlap(0.5)),
         ("overlap_0_8", Rung::Overlap(0.8)),
         ("overlap_1_0", Rung::Overlap(1.0)),
+        ("overlap_0_8_negation_guard", Rung::NegationGuard(0.8)),
     ];
     let mut out = serde_json::Map::new();
     for (name, r) in rungs {
@@ -99,12 +110,24 @@ pub fn run_ladder(seed: u64, n: usize, boot: usize) -> Value {
         o.insert("supporting_accept_rate".into(), json!(mean(&s)));
         o.insert("contradicting_accept_rate".into(), json!(mean(&c)));
         o.insert("unrelated_accept_rate".into(), json!(mean(&u)));
+        let split = |neg: bool| -> f64 {
+            let v: Vec<f64> = items
+                .iter()
+                .filter(|it| it.negation_type == neg)
+                .map(|it| accepts(r, &it.contradicting, &it.claim))
+                .collect();
+            if v.is_empty() { 0.0 } else { mean(&v) }
+        };
+        o.insert("contradicting_negation_accept_rate".into(), json!(split(true)));
+        o.insert("contradicting_value_swap_accept_rate".into(), json!(split(false)));
         o.insert("supporting_ci".into(), rate(&s, boot, seed));
         o.insert("contradicting_ci".into(), rate(&c, boot, seed));
         o.insert("unrelated_ci".into(), rate(&u, boot, seed));
         out.insert(name.into(), Value::Object(o));
     }
-    json!({ "n_claims": n, "seed": seed, "boot": boot, "synthetic": true, "rungs": out })
+    let value_swap_share =
+        items.iter().filter(|it| !it.negation_type).count() as f64 / n as f64;
+    json!({ "value_swap_share": value_swap_share, "n_claims": n, "seed": seed, "boot": boot, "synthetic": true, "rungs": out })
 }
 
 #[cfg(test)]
@@ -124,6 +147,23 @@ mod tests {
         }
         assert_eq!(v["rungs"]["exact_substring"]["contradicting_accept_rate"], 0.0);
         assert_eq!(v["rungs"]["overlap_0_8"]["unrelated_accept_rate"], 0.0);
+    }
+
+    #[test]
+    fn negation_guard_rejects_negation_keeps_value_swap() {
+        let v = run_ladder(7, 400, 100);
+        let g = &v["rungs"]["overlap_0_8_negation_guard"];
+        assert_eq!(g["contradicting_negation_accept_rate"], 0.0);
+        assert_eq!(g["contradicting_value_swap_accept_rate"], 1.0);
+        assert_eq!(g["supporting_accept_rate"], 1.0);
+        assert_eq!(g["contradicting_accept_rate"], v["value_swap_share"]);
+    }
+
+    #[test]
+    fn not_count_differs_on_negation() {
+        let c: Vec<String> = vec!["a".into(), "b".into()];
+        let p: Vec<String> = vec!["a".into(), "not".into(), "b".into()];
+        assert_ne!(not_count(&c), not_count(&p));
     }
 
     #[test]

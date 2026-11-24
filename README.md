@@ -40,6 +40,17 @@ the exact-substring rung accepted 0.0 of contradicting passages. The fixture's
 contradictions differ by one inserted negation or one swapped token by
 construction, so this shows the signal's construction, not real-world rates.
 
+### Negation guard
+
+`results/589-negation-guard.json` adds a rung that keeps the 0.8 overlap test
+and rejects a passage whose count of the token `not` differs from the claim's.
+Its contradicting accept rate is 0.4975
+(`/ladder/rungs/overlap_0_8_negation_guard/contradicting_accept_rate`), equal to
+the fixture's value-swap share (`/ladder/value_swap_share`): negation-type
+contradictions were rejected (`.../contradicting_negation_accept_rate`, 0.0) and
+value-swap ones all accepted (`.../contradicting_value_swap_accept_rate`, 1.0).
+The guard only sees the one token it was written for, on a synthetic fixture.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores
