@@ -33,3 +33,22 @@ supporting accept below 1.0, or any negation-type contradiction accepted.
 
 The fixture is synthetic by construction; it measures the signal's construction,
 not any real RAG system.
+
+## 2026-11-24T12:43:14Z mixed-passage proposal:94f45988cfb7b3f37d7e9cfae790f6620717e699348c376f04eebf929ce4e658
+
+Hypothesis: on the seeded synthetic fixture (400 claims, seed 7) a passage that
+contains the claim verbatim and also a one-token contradicting variant of it
+(supporting passage followed by contradicting passage) is accepted by every
+lexical rung, including exact_substring and the negation-guard rung, so
+mixed_accept_rate is 1.0 at each rung, while unrelated accept stays 0.0.
+
+Metric: /ladder/rungs/exact_substring/mixed_accept_rate (expected 0.95-1.0;
+also expected 1.0 at overlap_1_0 and overlap_0_8_negation_guard).
+
+Falsifier: mixed_accept_rate below 0.95 at exact_substring, or unrelated accept
+above 0.05, or supporting accept below 1.0. (Noted before running: the
+negation-guard rung counts the token "not" over the whole passage, so it may
+reject mixed passages of negation type; that part of the claim may fail.)
+
+The fixture is synthetic by construction; it measures the signal's construction,
+not any real RAG system.

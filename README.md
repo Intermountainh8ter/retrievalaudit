@@ -51,6 +51,16 @@ contradictions were rejected (`.../contradicting_negation_accept_rate`, 0.0) and
 value-swap ones all accepted (`.../contradicting_value_swap_accept_rate`, 1.0).
 The guard only sees the one token it was written for, on a synthetic fixture.
 
+### Mixed passage
+
+`results/590-mixed-passage.json` adds a passage holding the claim verbatim plus
+its contradicting variant. The exact-substring rung accepted 1.0 of them
+(`/ladder/rungs/exact_substring/mixed_accept_rate`), as did overlap 1.0. The
+negation-guard rung accepted 0.4975
+(`/ladder/rungs/overlap_0_8_negation_guard/mixed_accept_rate`), so that part of
+the pre-registered expectation failed: its `not` count over the whole passage
+rejects the negation-type mixes. Synthetic fixture.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores

@@ -51,6 +51,14 @@ pub fn build_fixture(seed: u64, n: usize) -> Vec<Item> {
     items
 }
 
+/// Supporting passage followed by the contradicting one: contains the claim verbatim
+/// and also a one-token contradicting variant of it.
+fn mixed_passage(it: &Item) -> Vec<String> {
+    let mut p = it.supporting.clone();
+    p.extend(it.contradicting.iter().cloned());
+    p
+}
+
 fn contains_run(passage: &[String], claim: &[String]) -> bool {
     passage.windows(claim.len()).any(|w| w == claim)
 }
@@ -105,6 +113,10 @@ pub fn run_ladder(seed: u64, n: usize, boot: usize) -> Value {
         let s = col(|i| &i.supporting);
         let c = col(|i| &i.contradicting);
         let u = col(|i| &i.unrelated);
+        let m: Vec<f64> = items
+            .iter()
+            .map(|it| accepts(r, &mixed_passage(it), &it.claim))
+            .collect();
         let mean = |v: &[f64]| v.iter().sum::<f64>() / v.len() as f64;
         let mut o = serde_json::Map::new();
         o.insert("supporting_accept_rate".into(), json!(mean(&s)));
@@ -120,6 +132,7 @@ pub fn run_ladder(seed: u64, n: usize, boot: usize) -> Value {
         };
         o.insert("contradicting_negation_accept_rate".into(), json!(split(true)));
         o.insert("contradicting_value_swap_accept_rate".into(), json!(split(false)));
+        o.insert("mixed_accept_rate".into(), json!(mean(&m)));
         o.insert("supporting_ci".into(), rate(&s, boot, seed));
         o.insert("contradicting_ci".into(), rate(&c, boot, seed));
         o.insert("unrelated_ci".into(), rate(&u, boot, seed));
@@ -133,6 +146,15 @@ pub fn run_ladder(seed: u64, n: usize, boot: usize) -> Value {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn mixed_passage_accepted_by_exact_and_overlap() {
+        let v = run_ladder(7, 50, 20);
+        for r in ["exact_substring", "overlap_1_0", "overlap_0_8"] {
+            assert_eq!(v["rungs"][r]["mixed_accept_rate"].as_f64().unwrap(), 1.0);
+        }
+        assert_eq!(v["rungs"]["exact_substring"]["unrelated_accept_rate"].as_f64().unwrap(), 0.0);
+    }
 
     #[test]
     fn deterministic() {
