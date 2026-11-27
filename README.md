@@ -116,3 +116,17 @@ suite of pre-registered audit crates.
 ## License
 
 MIT.
+
+### Coverage cost of a memory-conflict check
+
+`results/737-coverage-cost.json` adds a conflict check on accepted answers
+(false-fire rate 0.2 on correct answers) to the shared-wrong verifier, same
+3000-question synthetic fixture, seed 7. At catch rate 0.8 the accepted-wrong
+rate fell from 0.3586 (`/coverage/unchecked/accepted_wrong_rate`) to 0.2594
+(`/coverage/stated_check/accepted_wrong_rate`), so it was not halved
+(`/coverage/stated_check_halves_accepted_wrong`, false). No catch rate on the
+grid halved it (`/coverage/half_feasible_on_grid`, false), because wrong
+accepted answers outside the memory-agreeing class are invisible to the check.
+The pre-registered metric, read at catch 1.0, was -0.0014
+(`/coverage/false_withhold_increase_at_half_accepted_wrong`), outside the
+expected 0.05-0.25: the hypothesis is refuted. Synthetic fixture.

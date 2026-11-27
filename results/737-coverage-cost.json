@@ -1,0 +1,278 @@
+{
+  "coverage": {
+    "always_answer": {
+      "accepted_wrong_rate": 0.453,
+      "false_withhold_fraction": null,
+      "n_accepted": 3000,
+      "n_accepted_wrong": 1359,
+      "n_false_withhold": 0,
+      "n_withheld": 0
+    },
+    "always_withhold": {
+      "accepted_wrong_rate": null,
+      "false_withhold_fraction": 0.547,
+      "n_accepted": 0,
+      "n_accepted_wrong": 0,
+      "n_false_withhold": 1641,
+      "n_withheld": 3000
+    },
+    "at_half_or_max_catch": {
+      "accepted_wrong_rate": 0.2013274336283186,
+      "false_withhold_fraction": 0.43845419847328243,
+      "n_accepted": 904,
+      "n_accepted_wrong": 182,
+      "n_false_withhold": 919,
+      "n_withheld": 2096
+    },
+    "catch_rate_at_half": null,
+    "false_fire_rate": 0.2,
+    "false_withhold_increase_at_half_accepted_wrong": -0.0014034527722691648,
+    "grid": [
+      {
+        "accepted_wrong_rate": 0.4074074074074074,
+        "catch_rate": 0.0,
+        "false_withhold_fraction": 0.5068922305764411,
+        "halved": false,
+        "n_accepted": 1404,
+        "n_accepted_wrong": 572,
+        "n_false_withhold": 809,
+        "n_withheld": 1596
+      },
+      {
+        "accepted_wrong_rate": 0.4031791907514451,
+        "catch_rate": 0.05,
+        "false_withhold_fraction": 0.5043316831683168,
+        "halved": false,
+        "n_accepted": 1384,
+        "n_accepted_wrong": 558,
+        "n_false_withhold": 815,
+        "n_withheld": 1616
+      },
+      {
+        "accepted_wrong_rate": 0.39514348785871967,
+        "catch_rate": 0.1,
+        "false_withhold_fraction": 0.4990859232175503,
+        "halved": false,
+        "n_accepted": 1359,
+        "n_accepted_wrong": 537,
+        "n_false_withhold": 819,
+        "n_withheld": 1641
+      },
+      {
+        "accepted_wrong_rate": 0.3858327053504145,
+        "catch_rate": 0.15,
+        "false_withhold_fraction": 0.49372384937238495,
+        "halved": false,
+        "n_accepted": 1327,
+        "n_accepted_wrong": 512,
+        "n_false_withhold": 826,
+        "n_withheld": 1673
+      },
+      {
+        "accepted_wrong_rate": 0.37806748466257667,
+        "catch_rate": 0.2,
+        "false_withhold_fraction": 0.4893867924528302,
+        "halved": false,
+        "n_accepted": 1304,
+        "n_accepted_wrong": 493,
+        "n_false_withhold": 830,
+        "n_withheld": 1696
+      },
+      {
+        "accepted_wrong_rate": 0.3737294761532447,
+        "catch_rate": 0.25,
+        "false_withhold_fraction": 0.48808832074375363,
+        "halved": false,
+        "n_accepted": 1279,
+        "n_accepted_wrong": 478,
+        "n_false_withhold": 840,
+        "n_withheld": 1721
+      },
+      {
+        "accepted_wrong_rate": 0.36775218427323275,
+        "catch_rate": 0.3,
+        "false_withhold_fraction": 0.48535324526134405,
+        "halved": false,
+        "n_accepted": 1259,
+        "n_accepted_wrong": 463,
+        "n_false_withhold": 845,
+        "n_withheld": 1741
+      },
+      {
+        "accepted_wrong_rate": 0.3595141700404858,
+        "catch_rate": 0.35,
+        "false_withhold_fraction": 0.48158640226628896,
+        "halved": false,
+        "n_accepted": 1235,
+        "n_accepted_wrong": 444,
+        "n_false_withhold": 850,
+        "n_withheld": 1765
+      },
+      {
+        "accepted_wrong_rate": 0.3519736842105263,
+        "catch_rate": 0.4,
+        "false_withhold_fraction": 0.4781390134529148,
+        "halved": false,
+        "n_accepted": 1216,
+        "n_accepted_wrong": 428,
+        "n_false_withhold": 853,
+        "n_withheld": 1784
+      },
+      {
+        "accepted_wrong_rate": 0.34203875315922494,
+        "catch_rate": 0.45,
+        "false_withhold_fraction": 0.4743519029233315,
+        "halved": false,
+        "n_accepted": 1187,
+        "n_accepted_wrong": 406,
+        "n_false_withhold": 860,
+        "n_withheld": 1813
+      },
+      {
+        "accepted_wrong_rate": 0.3324742268041237,
+        "catch_rate": 0.5,
+        "false_withhold_fraction": 0.47058823529411764,
+        "halved": false,
+        "n_accepted": 1164,
+        "n_accepted_wrong": 387,
+        "n_false_withhold": 864,
+        "n_withheld": 1836
+      },
+      {
+        "accepted_wrong_rate": 0.3248686514886165,
+        "catch_rate": 0.55,
+        "false_withhold_fraction": 0.4682454251883746,
+        "halved": false,
+        "n_accepted": 1142,
+        "n_accepted_wrong": 371,
+        "n_false_withhold": 870,
+        "n_withheld": 1858
+      },
+      {
+        "accepted_wrong_rate": 0.3182624113475177,
+        "catch_rate": 0.6,
+        "false_withhold_fraction": 0.4658119658119658,
+        "halved": false,
+        "n_accepted": 1128,
+        "n_accepted_wrong": 359,
+        "n_false_withhold": 872,
+        "n_withheld": 1872
+      },
+      {
+        "accepted_wrong_rate": 0.3070652173913043,
+        "catch_rate": 0.65,
+        "false_withhold_fraction": 0.4620253164556962,
+        "halved": false,
+        "n_accepted": 1104,
+        "n_accepted_wrong": 339,
+        "n_false_withhold": 876,
+        "n_withheld": 1896
+      },
+      {
+        "accepted_wrong_rate": 0.29313543599257885,
+        "catch_rate": 0.7,
+        "false_withhold_fraction": 0.45733610822060355,
+        "halved": false,
+        "n_accepted": 1078,
+        "n_accepted_wrong": 316,
+        "n_false_withhold": 879,
+        "n_withheld": 1922
+      },
+      {
+        "accepted_wrong_rate": 0.2796934865900383,
+        "catch_rate": 0.75,
+        "false_withhold_fraction": 0.4544989775051125,
+        "halved": false,
+        "n_accepted": 1044,
+        "n_accepted_wrong": 292,
+        "n_false_withhold": 889,
+        "n_withheld": 1956
+      },
+      {
+        "accepted_wrong_rate": 0.2594059405940594,
+        "catch_rate": 0.8,
+        "false_withhold_fraction": 0.4487437185929648,
+        "halved": false,
+        "n_accepted": 1010,
+        "n_accepted_wrong": 262,
+        "n_false_withhold": 893,
+        "n_withheld": 1990
+      },
+      {
+        "accepted_wrong_rate": 0.2454175152749491,
+        "catch_rate": 0.85,
+        "false_withhold_fraction": 0.44598612487611494,
+        "halved": false,
+        "n_accepted": 982,
+        "n_accepted_wrong": 241,
+        "n_false_withhold": 900,
+        "n_withheld": 2018
+      },
+      {
+        "accepted_wrong_rate": 0.23572170301142265,
+        "catch_rate": 0.9,
+        "false_withhold_fraction": 0.44428080510554735,
+        "halved": false,
+        "n_accepted": 963,
+        "n_accepted_wrong": 227,
+        "n_false_withhold": 905,
+        "n_withheld": 2037
+      },
+      {
+        "accepted_wrong_rate": 0.2207931404072883,
+        "catch_rate": 0.95,
+        "false_withhold_fraction": 0.44218674407353653,
+        "halved": false,
+        "n_accepted": 933,
+        "n_accepted_wrong": 206,
+        "n_false_withhold": 914,
+        "n_withheld": 2067
+      },
+      {
+        "accepted_wrong_rate": 0.2013274336283186,
+        "catch_rate": 1.0,
+        "false_withhold_fraction": 0.43845419847328243,
+        "halved": false,
+        "n_accepted": 904,
+        "n_accepted_wrong": 182,
+        "n_false_withhold": 919,
+        "n_withheld": 2096
+      }
+    ],
+    "half_feasible_on_grid": false,
+    "n_questions": 3000,
+    "stated_catch_rate": 0.8,
+    "stated_check": {
+      "accepted_wrong_rate": 0.2594059405940594,
+      "false_withhold_fraction": 0.4487437185929648,
+      "n_accepted": 1010,
+      "n_accepted_wrong": 262,
+      "n_false_withhold": 893,
+      "n_withheld": 1990
+    },
+    "stated_check_halves_accepted_wrong": false,
+    "unchecked": {
+      "accepted_wrong_rate": 0.3586206896551724,
+      "false_withhold_fraction": 0.4398576512455516,
+      "n_accepted": 1595,
+      "n_accepted_wrong": 572,
+      "n_false_withhold": 618,
+      "n_withheld": 1405
+    }
+  },
+  "provenance": {
+    "command": "retrievalaudit coverage --seed 7 --n-questions 3000 --out results/737-coverage-cost.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T23:14:16Z",
+    "wall_s": 0.000966442
+  }
+}

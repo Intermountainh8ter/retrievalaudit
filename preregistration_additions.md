@@ -112,3 +112,24 @@ unsupported rate not increasing monotonically with threshold across the grid.
 
 The fixture is synthetic by construction; it shows what the stated score
 distributions imply, not any real verifier.
+
+## 2026-11-27T23:14:02Z coverage proposal:6168274c6245a97459bd3a2feaa40539c4cb16b38226b001bd3dba05dd9ac3bd
+
+Hypothesis: on the 3000-question synthetic fixture (seed 7) where
+memory-agreeing misleading passages pass a support verifier, a conflict check
+applied to accepted answers that fires on memory-agreeing misleading answers
+with probability 0.8 and on correct accepted answers with probability 0.2
+halves the accepted-wrong rate relative to the unchecked verifier only by
+raising the false-withhold fraction (correct share of withheld answers) by at
+least 0.05 over the unchecked verifier. Catch rate is swept on a 0.05 grid; the
+metric is read at the smallest catch rate that halves the rate, or at catch 1.0
+if none does (flagged by half_feasible_on_grid).
+
+Metric: /coverage/false_withhold_increase_at_half_accepted_wrong (expected
+0.05-0.25).
+
+Falsifier: increase below 0.05, or the accepted-wrong rate not halved at the
+0.8 catch rate (reported as stated_check_halves_accepted_wrong).
+
+Synthetic fixture; it shows what the stated catch and false-fire rates imply,
+not any real verifier.

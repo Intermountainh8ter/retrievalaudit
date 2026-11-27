@@ -65,6 +65,15 @@ enum Cmd {
         #[arg(long)]
         out: PathBuf,
     },
+    /// Model-free coverage-cost simulation of a memory-conflict check on the shared-wrong verifier.
+    Coverage {
+        #[arg(long, default_value_t = 7)]
+        seed: u64,
+        #[arg(long, default_value_t = 3000)]
+        n_questions: usize,
+        #[arg(long)]
+        out: PathBuf,
+    },
     /// Model-free shared-wrong verifier simulation on a seeded synthetic fixture.
     Sharedwrong {
         #[arg(long, default_value_t = 7)]
@@ -200,6 +209,25 @@ fn main() -> anyhow::Result<()> {
                 "started_at": utc_iso(started),
                 "seeds": [seed],
                 "command": format!("retrievalaudit sharedwrong --seed {seed} --n-questions {n_questions} --out {}", out.display()),
+                "hardware": "cpu",
+                "wall_s": t0.elapsed().as_secs_f64(),
+                "data_sources": [{"url": "synthetic: generated in-crate from seed, no external data", "license": "MIT"}],
+            });
+            if let Some(d) = out.parent() {
+                std::fs::create_dir_all(d)?;
+            }
+            std::fs::write(&out, serde_json::to_string_pretty(&doc)? + "\n")?;
+        }
+        Cmd::Coverage { seed, n_questions, out } => {
+            let t0 = std::time::Instant::now();
+            let started = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)?
+                .as_secs();
+            let mut doc = retrievalaudit::coverage::run_coverage(seed, n_questions);
+            doc["provenance"] = serde_json::json!({
+                "started_at": utc_iso(started),
+                "seeds": [seed],
+                "command": format!("retrievalaudit coverage --seed {seed} --n-questions {n_questions} --out {}", out.display()),
                 "hardware": "cpu",
                 "wall_s": t0.elapsed().as_secs_f64(),
                 "data_sources": [{"url": "synthetic: generated in-crate from seed, no external data", "license": "MIT"}],
