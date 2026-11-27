@@ -133,3 +133,21 @@ Falsifier: increase below 0.05, or the accepted-wrong rate not halved at the
 
 Synthetic fixture; it shows what the stated catch and false-fire rates imply,
 not any real verifier.
+
+## 2026-11-27T23:45:22Z abstain proposal:adf2b0254b74bda902855582f179d33780c807be293e6787f1656ce164910abc
+
+Hypothesis: on the 3000-question synthetic shared-wrong fixture (seed 7), a
+prompt-level abstention layer that lets a stated 0.416 of misleading questions
+through to the verifier (the rest are withheld before verification) lowers the
+accepted-wrong rate below the verifier-alone value of 0.3586, but leaves it
+above 0.15 because missing-evidence wrong answers and memory-agreeing
+misleading answers still pass.
+
+Metric: /abstain/accepted_wrong_rate (expected 0.15-0.35, decreasing from
+0.3586).
+
+Falsifier: accepted_wrong_rate at or above 0.3586, or below 0.15. The false-withhold
+fraction is reported alongside as a cost.
+
+Synthetic fixture; it shows what the stated pass-through rate implies, not any
+real model.

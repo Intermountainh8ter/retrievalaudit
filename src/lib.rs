@@ -13,6 +13,7 @@
 //! See `docs/PREREGISTRATION.md` for the clauses this scaffold closes.
 
 use rand::SeedableRng;
+pub mod abstain;
 pub mod coverage;
 pub mod ladder;
 pub mod sharedwrong;

@@ -130,3 +130,16 @@ accepted answers outside the memory-agreeing class are invisible to the check.
 The pre-registered metric, read at catch 1.0, was -0.0014
 (`/coverage/false_withhold_increase_at_half_accepted_wrong`), outside the
 expected 0.05-0.25: the hypothesis is refuted. Synthetic fixture.
+
+### Abstention layer in front of the shared-wrong verifier
+
+`results/742-abstain-layer.json` puts a prompt-level abstention layer in front
+of the shared-wrong verifier: it lets a stated 0.416 of misleading questions
+through (`/abstain/stated_misleading_answer_rate`) and withholds the rest
+(3000 synthetic questions, seed 7). The accepted-wrong rate fell from 0.3586
+(`/abstain/verifier_alone/accepted_wrong_rate`) to 0.2601
+(`/abstain/accepted_wrong_rate`), inside the pre-registered 0.15-0.35 range.
+The false-withhold fraction moved from 0.4399
+(`/abstain/verifier_alone/false_withhold_fraction`) to 0.4027
+(`/abstain/false_withhold_fraction`). Synthetic fixture; it shows what the
+stated pass-through rate implies, not any real model.

@@ -1,0 +1,41 @@
+{
+  "abstain": {
+    "accepted_wrong_rate": 0.2601246105919003,
+    "accepted_wrong_rate_change": -0.09849607906327212,
+    "false_withhold_fraction": 0.4026806526806527,
+    "false_withhold_fraction_change": -0.03717699856489892,
+    "layered": {
+      "accepted_wrong_rate": 0.2601246105919003,
+      "false_withhold_fraction": 0.4026806526806527,
+      "n_accepted": 1284,
+      "n_accepted_wrong": 334,
+      "n_false_withhold": 691,
+      "n_withheld": 1716
+    },
+    "n_questions": 3000,
+    "stated_misleading_answer_rate": 0.416,
+    "verifier_alone": {
+      "accepted_wrong_rate": 0.3586206896551724,
+      "false_withhold_fraction": 0.4398576512455516,
+      "n_accepted": 1595,
+      "n_accepted_wrong": 572,
+      "n_false_withhold": 618,
+      "n_withheld": 1405
+    }
+  },
+  "provenance": {
+    "command": "retrievalaudit abstain --seed 7 --n-questions 3000 --out results/742-abstain-layer.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T23:45:27Z",
+    "wall_s": 0.000318262
+  }
+}
