@@ -1,0 +1,110 @@
+{
+  "provenance": {
+    "command": "retrievalaudit withhold --seed 7 --n-questions 3000 --out results/700-withhold-conformal.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T20:17:57Z",
+    "wall_s": 0.00109995
+  },
+  "withhold": {
+    "alpha_0_05": {
+      "alpha": 0.05,
+      "false_withhold_fraction": 0.5406666666666666,
+      "feasible": false,
+      "n_accepted": 0,
+      "n_withheld": 1500,
+      "per_condition": {
+        "misleading": {
+          "false_withhold_fraction": 0.20634920634920634,
+          "false_withhold_share_of_all": 0.1282367447595561,
+          "n_false_withhold": 104,
+          "n_withheld": 504
+        },
+        "missing": {
+          "false_withhold_fraction": 0.5123456790123457,
+          "false_withhold_share_of_all": 0.3070283600493218,
+          "n_false_withhold": 249,
+          "n_withheld": 486
+        },
+        "sufficient": {
+          "false_withhold_fraction": 0.8980392156862745,
+          "false_withhold_share_of_all": 0.5647348951911221,
+          "n_false_withhold": 458,
+          "n_withheld": 510
+        }
+      },
+      "realised_accepted_wrong_rate": null,
+      "threshold": null
+    },
+    "alpha_0_1": {
+      "alpha": 0.1,
+      "false_withhold_fraction": 0.5406666666666666,
+      "feasible": false,
+      "n_accepted": 0,
+      "n_withheld": 1500,
+      "per_condition": {
+        "misleading": {
+          "false_withhold_fraction": 0.20634920634920634,
+          "false_withhold_share_of_all": 0.1282367447595561,
+          "n_false_withhold": 104,
+          "n_withheld": 504
+        },
+        "missing": {
+          "false_withhold_fraction": 0.5123456790123457,
+          "false_withhold_share_of_all": 0.3070283600493218,
+          "n_false_withhold": 249,
+          "n_withheld": 486
+        },
+        "sufficient": {
+          "false_withhold_fraction": 0.8980392156862745,
+          "false_withhold_share_of_all": 0.5647348951911221,
+          "n_false_withhold": 458,
+          "n_withheld": 510
+        }
+      },
+      "realised_accepted_wrong_rate": null,
+      "threshold": null
+    },
+    "alpha_0_3": {
+      "alpha": 0.3,
+      "false_withhold_fraction": 0.5406666666666666,
+      "feasible": false,
+      "n_accepted": 0,
+      "n_withheld": 1500,
+      "per_condition": {
+        "misleading": {
+          "false_withhold_fraction": 0.20634920634920634,
+          "false_withhold_share_of_all": 0.1282367447595561,
+          "n_false_withhold": 104,
+          "n_withheld": 504
+        },
+        "missing": {
+          "false_withhold_fraction": 0.5123456790123457,
+          "false_withhold_share_of_all": 0.3070283600493218,
+          "n_false_withhold": 249,
+          "n_withheld": 486
+        },
+        "sufficient": {
+          "false_withhold_fraction": 0.8980392156862745,
+          "false_withhold_share_of_all": 0.5647348951911221,
+          "n_false_withhold": 458,
+          "n_withheld": 510
+        }
+      },
+      "realised_accepted_wrong_rate": null,
+      "threshold": null
+    },
+    "false_withhold_fraction_at_alpha_0_1": 0.5406666666666666,
+    "n_calibration": 1500,
+    "n_questions": 3000,
+    "n_test": 1500
+  }
+}

@@ -52,3 +52,25 @@ reject mixed passages of negation type; that part of the claim may fail.)
 
 The fixture is synthetic by construction; it measures the signal's construction,
 not any real RAG system.
+
+## 2026-11-27T20:17:53Z withhold-conformal proposal:c0cc512cf0e6ca45377fd9da16f38a1f34f09a0b76c8cd7858c3b1e8f3320cc2
+
+Hypothesis: on a seeded synthetic fixture (3000 questions, seed 7, equal thirds
+sufficient/missing/misleading evidence; answer-correct probability 0.9/0.5/0.2
+by condition; verifier score blind to the misleading condition, i.e. drawn from
+the same distribution as sufficient), a split-conformal threshold set for an
+accepted-wrong budget alpha=0.1 withholds answers of which a large share were
+correct, so false_withhold_fraction at alpha 0.1 lies between 0.30 and 0.70 and
+the missing-evidence condition contributes more false withholds than the
+misleading condition.
+
+Metric: /withhold/false_withhold_fraction_at_alpha_0_1 (expected 0.30-0.70).
+
+Falsifier: false_withhold_fraction at alpha 0.1 outside 0.30-0.70, or the
+misleading condition contributing as many or more false withholds than the
+missing condition, or the realised accepted-wrong rate on the test split
+exceeding alpha by more than 0.03.
+
+Noted before running: the threshold rule requires (wrong+1)/(accepted+1) <= alpha
+on the calibration half; if no threshold is feasible, everything is withheld
+and the result reports that. The fixture is synthetic by construction.

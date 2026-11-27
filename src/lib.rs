@@ -14,6 +14,7 @@
 
 use rand::SeedableRng;
 pub mod ladder;
+pub mod withhold;
 use rand_pcg::Pcg64Mcg;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};

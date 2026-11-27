@@ -61,6 +61,20 @@ negation-guard rung accepted 0.4975
 the pre-registered expectation failed: its `not` count over the whole passage
 rejects the negation-type mixes. Synthetic fixture.
 
+### Withhold under a conformal budget
+
+`results/700-withhold-conformal.json` simulates a verifier that sees missing
+evidence but is blind to misleading evidence (3000 synthetic questions, seed 7,
+half calibration, half test). No threshold met the accepted-wrong budget at
+alpha 0.1 (`/withhold/alpha_0_1/feasible`, false), so every test answer was
+withheld and the false-withhold fraction was 0.5407
+(`/withhold/false_withhold_fraction_at_alpha_0_1`), inside the pre-registered
+0.30-0.70 range. Missing evidence contributed 249 false withholds
+(`/withhold/alpha_0_1/per_condition/missing/n_false_withhold`) against 104 for
+misleading (`.../misleading/n_false_withhold`); sufficient evidence contributed
+458 (`.../sufficient/n_false_withhold`). Synthetic fixture; the result mostly
+shows that a blind spot makes the budget infeasible.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores
