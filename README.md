@@ -87,6 +87,17 @@ accepted-wrong rate was 0.3586 (`/verifier/accepted_wrong_rate`). Both
 expectations held; the pass rates are inputs, so this shows what the stated blind
 spot implies, not any real verifier.
 
+### Verifier strictness sweep
+
+`results/728-strictness-sweep.json` sweeps an overlap-threshold verifier from
+0.50 to 0.95 over 3000 synthetic claims (seed 7, 70% supported). The measured
+unsupported rate rose monotonically (`/strictness_sweep/monotone_increasing`,
+true) by 0.6797 (`/strictness_sweep/rise_in_measured_unsupported_rate`); false
+rejections of supported claims supplied 0.8239 of the rise
+(`/strictness_sweep/false_rejection_share_of_rise`), inside the pre-registered
+0.50-0.95 range. Synthetic score distributions chosen by hand; this shows what
+they imply, not a real verifier.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores

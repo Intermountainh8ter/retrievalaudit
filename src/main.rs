@@ -74,6 +74,15 @@ enum Cmd {
         #[arg(long)]
         out: PathBuf,
     },
+    /// Model-free verifier-strictness sweep on a seeded synthetic fixture.
+    Strictness {
+        #[arg(long, default_value_t = 7)]
+        seed: u64,
+        #[arg(long, default_value_t = 3000)]
+        n_claims: usize,
+        #[arg(long)]
+        out: PathBuf,
+    },
     /// Print the version banner and exit.
     Version,
 }
@@ -191,6 +200,25 @@ fn main() -> anyhow::Result<()> {
                 "started_at": utc_iso(started),
                 "seeds": [seed],
                 "command": format!("retrievalaudit sharedwrong --seed {seed} --n-questions {n_questions} --out {}", out.display()),
+                "hardware": "cpu",
+                "wall_s": t0.elapsed().as_secs_f64(),
+                "data_sources": [{"url": "synthetic: generated in-crate from seed, no external data", "license": "MIT"}],
+            });
+            if let Some(d) = out.parent() {
+                std::fs::create_dir_all(d)?;
+            }
+            std::fs::write(&out, serde_json::to_string_pretty(&doc)? + "\n")?;
+        }
+        Cmd::Strictness { seed, n_claims, out } => {
+            let t0 = std::time::Instant::now();
+            let started = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)?
+                .as_secs();
+            let mut doc = retrievalaudit::strictness::run_strictness(seed, n_claims);
+            doc["provenance"] = serde_json::json!({
+                "started_at": utc_iso(started),
+                "seeds": [seed],
+                "command": format!("retrievalaudit strictness --seed {seed} --n-claims {n_claims} --out {}", out.display()),
                 "hardware": "cpu",
                 "wall_s": t0.elapsed().as_secs_f64(),
                 "data_sources": [{"url": "synthetic: generated in-crate from seed, no external data", "license": "MIT"}],

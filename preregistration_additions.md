@@ -94,3 +94,21 @@ of 0.5 or less.
 
 The fixture is synthetic by construction; it measures what the stated blind
 spot implies, not any real verifier.
+
+## 2026-11-27T22:32:45Z strictness proposal:04dd6e3f64ffa8f3a45481cd7b3fdb97003dd18293a7726a3afd97eca38bf063
+
+Hypothesis: on a seeded synthetic fixture (3000 claims, seed 7, 70% supported;
+verifier overlap score ~ clipped normal, mean 0.85 sd 0.12 for supported and
+mean 0.45 sd 0.20 for unsupported), raising the verifier threshold from 0.50 to
+0.95 (grid step 0.05; a claim is measured unsupported when its score is below
+the threshold) raises the measured unsupported rate, and more than half of that
+rise comes from false rejection of supported claims.
+
+Metric: /strictness_sweep/false_rejection_share_of_rise (expected 0.50-0.95;
+analytic expectation about 0.8).
+
+Falsifier: false_rejection_share_of_rise of 0.50 or less, or measured
+unsupported rate not increasing monotonically with threshold across the grid.
+
+The fixture is synthetic by construction; it shows what the stated score
+distributions imply, not any real verifier.

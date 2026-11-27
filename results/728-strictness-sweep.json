@@ -1,0 +1,88 @@
+{
+  "provenance": {
+    "command": "retrievalaudit strictness --seed 7 --n-claims 3000 --out results/728-strictness-sweep.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T22:32:59Z",
+    "wall_s": 0.004083705
+  },
+  "strictness_sweep": {
+    "false_rejection_share_of_rise": 0.8239333006375674,
+    "grid": [
+      {
+        "measured_unsupported_rate": 0.17533333333333334,
+        "n_false_rejections": 5,
+        "n_true_detections": 521,
+        "threshold": 0.5
+      },
+      {
+        "measured_unsupported_rate": 0.20566666666666666,
+        "n_false_rejections": 14,
+        "n_true_detections": 603,
+        "threshold": 0.55
+      },
+      {
+        "measured_unsupported_rate": 0.23566666666666666,
+        "n_false_rejections": 39,
+        "n_true_detections": 668,
+        "threshold": 0.6
+      },
+      {
+        "measured_unsupported_rate": 0.277,
+        "n_false_rejections": 102,
+        "n_true_detections": 729,
+        "threshold": 0.65
+      },
+      {
+        "measured_unsupported_rate": 0.335,
+        "n_false_rejections": 232,
+        "n_true_detections": 773,
+        "threshold": 0.7
+      },
+      {
+        "measured_unsupported_rate": 0.4196666666666667,
+        "n_false_rejections": 438,
+        "n_true_detections": 821,
+        "threshold": 0.75
+      },
+      {
+        "measured_unsupported_rate": 0.5283333333333333,
+        "n_false_rejections": 733,
+        "n_true_detections": 852,
+        "threshold": 0.8
+      },
+      {
+        "measured_unsupported_rate": 0.6456666666666667,
+        "n_false_rejections": 1068,
+        "n_true_detections": 869,
+        "threshold": 0.85
+      },
+      {
+        "measured_unsupported_rate": 0.758,
+        "n_false_rejections": 1398,
+        "n_true_detections": 876,
+        "threshold": 0.9
+      },
+      {
+        "measured_unsupported_rate": 0.855,
+        "n_false_rejections": 1685,
+        "n_true_detections": 880,
+        "threshold": 0.95
+      }
+    ],
+    "monotone_increasing": true,
+    "n_claims": 3000,
+    "n_supported": 2115,
+    "rise_false_rejections": 1680,
+    "rise_in_measured_unsupported_rate": 0.6796666666666666,
+    "rise_true_detections": 359
+  }
+}
