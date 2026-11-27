@@ -75,6 +75,18 @@ misleading (`.../misleading/n_false_withhold`); sufficient evidence contributed
 458 (`.../sufficient/n_false_withhold`). Synthetic fixture; the result mostly
 shows that a blind spot makes the budget infeasible.
 
+### Shared-wrong blind spot
+
+`results/709-sharedwrong.json` simulates a fixed-threshold support verifier that
+also passes misleading passages when parametric memory agrees with the passage
+(3000 synthetic questions, seed 7). The false-withhold rate was 0.4399
+(`/verifier/false_withhold_rate`), inside the pre-registered 0.30-0.55 range, and
+memory-agreeing misleading questions supplied 0.6818 of accepted wrong answers
+(`/verifier/agree_share_of_accepted_wrong`), above the pre-registered 0.5. The
+accepted-wrong rate was 0.3586 (`/verifier/accepted_wrong_rate`). Both
+expectations held; the pass rates are inputs, so this shows what the stated blind
+spot implies, not any real verifier.
+
 ## What is openly deferred (§9)
 
 - No live retriever / generator drivers. The scaffold scores

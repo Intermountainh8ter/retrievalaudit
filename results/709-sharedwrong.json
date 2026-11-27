@@ -1,0 +1,45 @@
+{
+  "provenance": {
+    "command": "retrievalaudit sharedwrong --seed 7 --n-questions 3000 --out results/709-sharedwrong.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: generated in-crate from seed, no external data"
+      }
+    ],
+    "hardware": "cpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T21:06:26Z",
+    "wall_s": 0.001077245
+  },
+  "verifier": {
+    "accepted_wrong_rate": 0.3586206896551724,
+    "agree_share_of_accepted_wrong": 0.6818181818181818,
+    "false_withhold_rate": 0.4398576512455516,
+    "n_accepted": 1595,
+    "n_accepted_wrong": 572,
+    "n_accepted_wrong_agree_misleading": 390,
+    "n_false_withhold": 618,
+    "n_questions": 3000,
+    "n_withheld": 1405,
+    "per_condition": {
+      "misleading": {
+        "n_accepted_wrong": 432,
+        "n_false_withhold": 88,
+        "n_withheld": 445
+      },
+      "missing": {
+        "n_accepted_wrong": 48,
+        "n_false_withhold": 475,
+        "n_withheld": 902
+      },
+      "sufficient": {
+        "n_accepted_wrong": 92,
+        "n_false_withhold": 55,
+        "n_withheld": 58
+      }
+    }
+  }
+}

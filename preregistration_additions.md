@@ -74,3 +74,23 @@ exceeding alpha by more than 0.03.
 Noted before running: the threshold rule requires (wrong+1)/(accepted+1) <= alpha
 on the calibration half; if no threshold is feasible, everything is withheld
 and the result reports that. The fixture is synthetic by construction.
+
+## 2026-11-27T21:06:24Z sharedwrong proposal:e22bf20eb2524798ac9b9df8930afa2fba6520c08b242b313562010631af5574
+
+Hypothesis: on a seeded synthetic fixture (3000 questions, seed 7, equal thirds
+sufficient/missing/misleading evidence; answer-correct probability 0.9/0.5/0.2;
+half of misleading questions have parametric memory agreeing with the passage;
+a fixed support test passes 0.95 of sufficient and memory-agreeing misleading
+cases but only 0.10 of missing and memory-disagreeing misleading cases), the
+fraction of withheld answers that were correct lies between 0.30 and 0.55, and
+memory-agreeing misleading questions supply more than half of all accepted
+wrong answers.
+
+Metric: /verifier/false_withhold_rate (expected 0.30-0.55; analytic expectation
+about 0.41). Secondary: /verifier/agree_share_of_accepted_wrong (expected > 0.5).
+
+Falsifier: false_withhold_rate outside 0.30-0.55, or agree_share_of_accepted_wrong
+of 0.5 or less.
+
+The fixture is synthetic by construction; it measures what the stated blind
+spot implies, not any real verifier.
